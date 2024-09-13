@@ -1,15 +1,18 @@
 package com.example.demo.domain.group;
 
+import com.example.demo.domain.group.dto.GroupDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/group")
@@ -20,35 +23,52 @@ public class GroupController {
 
     @GetMapping()
     @Operation(description = "Get all Groups", summary = "Get all Groups")
-    public ResponseEntity<List<Group>> getAllGroups(){
-        return ResponseEntity.ok().body(groupService.getAllGroups());
+    public ResponseEntity<List<GroupDTO>> getAllGroups() {
+        return ResponseEntity.ok(groupService.getAllGroups());
     }
 
     @GetMapping("/{groupId}")
-    @Operation(description = "Get a Group by it's Id", summary = "Get a Group by it's Id")
-    public ResponseEntity<Group> getGroupById(@PathVariable("groupId")Integer groupId){
-        return ResponseEntity.ok().body(groupService.getGroupById(groupId));
+    @Operation(description = "Get a Group by its Id", summary = "Get a Group by its Id")
+    public ResponseEntity<GroupDTO> getGroupById(@PathVariable("groupId") Integer groupId) {
+        Optional<GroupDTO> group = groupService.getGroupById(groupId);
+        return group.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PostMapping("")
     @PreAuthorize("hasAuthority('CREATE')")
     @Operation(description = "Create a new Group", summary = "Create a new Group")
-    public ResponseEntity<Group> addGroup(@Valid @RequestBody Group group){
-        Group createdGroup = groupService.addGroup(group);
+    public ResponseEntity<GroupDTO> addGroup(@Valid @RequestBody GroupDTO groupDTO) {
+        GroupDTO createdGroup = groupService.addGroup(groupDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdGroup);
     }
 
     @PutMapping("/{groupId}")
     @PreAuthorize("hasAuthority('UPDATE')")
-    @Operation(description = "Update an existig Group", summary = "Update an Existing Group")
-    public ResponseEntity<Group> updateGroup(@PathVariable ("groupId")Integer groupId, @Valid @RequestBody Group group){
-        return ResponseEntity.ok().body(groupService.updateGroup(groupId, group));
+    @Operation(description = "Update an existing Group", summary = "Update an existing Group")
+    public ResponseEntity<GroupDTO> updateGroup(@PathVariable("groupId") Integer groupId, @Valid @RequestBody GroupDTO groupDTO) {
+        GroupDTO updatedGroup = groupService.updateGroup(groupId, groupDTO);
+        if (updatedGroup != null) {
+            return ResponseEntity.ok(updatedGroup);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @DeleteMapping("/{groupId}")
     @PreAuthorize("hasAuthority('DELETE')")
     @Operation(description = "Delete an existing Group", summary = "Delete an existing Group")
-    public ResponseEntity<String> deleteGroup(@PathVariable Integer groupId){
-        return ResponseEntity.ok().body(groupService.deleteGroup(groupId));
+    public ResponseEntity<Void> deleteGroup(@PathVariable Integer groupId) {
+        groupService.deleteGroup(groupId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @GetMapping("/paginated")
+    @Operation(description = "Get paginated list of Groups", summary = "Get paginated list of Groups")
+    public ResponseEntity<Page<GroupDTO>> getGroupsPaginated(Pageable pageable) {
+        Page<GroupDTO> groupPage = groupService.getGroupsPaginated(pageable);
+        return ResponseEntity.ok(groupPage);
+    }
+
+
 }
