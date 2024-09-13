@@ -1,27 +1,34 @@
 package com.example.demo.domain.group;
 
-
 import com.example.demo.core.generic.AbstractEntity;
+import com.example.demo.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.userdetails.User;
+
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @Table(name = "group")
 public class Group extends AbstractEntity {
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "group_users",
+            joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
+    private List<User> members;
 
     @Column(name = "group_motto")
     @NotNull
-    @Max(20)
+    @Size(max = 20)
     private String group_motto;
 
     @Column(name = "group_name")
@@ -33,12 +40,15 @@ public class Group extends AbstractEntity {
     @NotNull
     private String group_logo_url;
 
-    @Column(name = "group_member")
-    @Max(20)
-    private User member;
+    public Group(UUID id, List<User> members, String group_motto, String group_name, String group_logo_url) {
+        super(id);
+        this.members = members;
+        this.group_motto = group_motto;
+        this.group_name = group_name;
+        this.group_logo_url = group_logo_url;
+    }
 
+    public Group() {
 
-
-
+    }
 }
-
