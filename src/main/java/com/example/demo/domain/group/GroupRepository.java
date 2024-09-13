@@ -1,8 +1,10 @@
 package com.example.demo.domain.group;
 
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.core.generic.AbstractRepository;
+import org.springframework.stereotype.Repository;
 
-public interface GroupRepository extends JpaRepository<Group, Integer> {
+@Repository
+public interface GroupRepository extends AbstractRepository<Group> {
 
 }
