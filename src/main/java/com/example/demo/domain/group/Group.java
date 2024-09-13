@@ -1,6 +1,7 @@
 package com.example.demo.domain.group;
 
 
+import com.example.demo.core.generic.AbstractEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
@@ -15,7 +16,7 @@ import org.springframework.security.core.userdetails.User;
 @Setter
 @NoArgsConstructor
 @Table(name = "group")
-public class Group {
+public class Group extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
