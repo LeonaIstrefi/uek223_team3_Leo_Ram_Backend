@@ -24,13 +24,13 @@ public class GroupController {
     private GroupServiceImpl groupService;
 
     @GetMapping()
-    @Operation(description = "Get all Groups", summary = "Get all Groups")
+    @Operation(description = "Retrieve a list of all groups in the system.", summary = "Get all Groups")
     public ResponseEntity<List<GroupDTO>> getAllGroups() {
         return ResponseEntity.ok(groupService.getAllGroups());
     }
 
     @GetMapping("/{groupId}")
-    @Operation(description = "Get a Group by its Id", summary = "Get a Group by its Id")
+    @Operation(description = "Fetch details of a specific group by its unique identifier.", summary = "Get a Group by its Id")
     public ResponseEntity<GroupDTO> getGroupById(@PathVariable("groupId") UUID groupId) {
         Optional<GroupDTO> group = groupService.getGroupById(groupId);
         return group.map(ResponseEntity::ok)
@@ -39,7 +39,7 @@ public class GroupController {
 
     @PostMapping("")
     @PreAuthorize("hasAuthority('CREATE')")
-    @Operation(description = "Create a new Group", summary = "Create a new Group")
+    @Operation(description = "Create a new group with the provided details.", summary = "Create a new Group")
     public ResponseEntity<GroupDTO> addGroup(@Valid @RequestBody GroupDTO groupDTO) {
         GroupDTO createdGroup = groupService.addGroup(groupDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdGroup);
@@ -47,7 +47,7 @@ public class GroupController {
 
     @PutMapping("/{groupId}")
     @PreAuthorize("hasAuthority('UPDATE')")
-    @Operation(description = "Update an existing Group", summary = "Update an existing Group")
+    @Operation(description = "Update the details of an existing group identified by its unique ID.", summary = "Update an existing Group")
     public ResponseEntity<GroupDTO> updateGroup(@PathVariable("groupId") UUID groupId, @Valid @RequestBody GroupDTO groupDTO) {
         GroupDTO updatedGroup = groupService.updateGroup(groupId, groupDTO);
         if (updatedGroup != null) {
@@ -59,14 +59,14 @@ public class GroupController {
 
     @DeleteMapping("/{groupId}")
     @PreAuthorize("hasAuthority('DELETE')")
-    @Operation(description = "Delete an existing Group", summary = "Delete an existing Group")
+    @Operation(description = "Remove a group from the system using its unique identifier.", summary = "Delete an existing Group")
     public ResponseEntity<Void> deleteGroup(@PathVariable UUID groupId) {
         groupService.deleteGroup(groupId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping("/{groupId}/members")
-    @Operation(description = "Get all members of a Group with pagination", summary = "Get all members of a Group with pagination")
+    @Operation(description = "Retrieve a paginated list of all members belonging to a specific group.", summary = "Get all members of a Group")
     public ResponseEntity<Page<User>> getGroupMembers(@PathVariable("groupId") UUID groupId, Pageable pageable) {
         Page<User> members = groupService.getGroupMembers(groupId, pageable);
         if (members.isEmpty()) {
