@@ -1,6 +1,7 @@
 package com.example.demo.domain.group;
 
 import com.example.demo.domain.group.dto.GroupDTO;
+import com.example.demo.domain.user.User;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/group")
@@ -29,7 +31,7 @@ public class GroupController {
 
     @GetMapping("/{groupId}")
     @Operation(description = "Get a Group by its Id", summary = "Get a Group by its Id")
-    public ResponseEntity<GroupDTO> getGroupById(@PathVariable("groupId") Integer groupId) {
+    public ResponseEntity<GroupDTO> getGroupById(@PathVariable("groupId") UUID groupId) {
         Optional<GroupDTO> group = groupService.getGroupById(groupId);
         return group.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -46,7 +48,7 @@ public class GroupController {
     @PutMapping("/{groupId}")
     @PreAuthorize("hasAuthority('UPDATE')")
     @Operation(description = "Update an existing Group", summary = "Update an existing Group")
-    public ResponseEntity<GroupDTO> updateGroup(@PathVariable("groupId") Integer groupId, @Valid @RequestBody GroupDTO groupDTO) {
+    public ResponseEntity<GroupDTO> updateGroup(@PathVariable("groupId") UUID groupId, @Valid @RequestBody GroupDTO groupDTO) {
         GroupDTO updatedGroup = groupService.updateGroup(groupId, groupDTO);
         if (updatedGroup != null) {
             return ResponseEntity.ok(updatedGroup);
@@ -58,17 +60,19 @@ public class GroupController {
     @DeleteMapping("/{groupId}")
     @PreAuthorize("hasAuthority('DELETE')")
     @Operation(description = "Delete an existing Group", summary = "Delete an existing Group")
-    public ResponseEntity<Void> deleteGroup(@PathVariable Integer groupId) {
+    public ResponseEntity<Void> deleteGroup(@PathVariable UUID groupId) {
         groupService.deleteGroup(groupId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping("/paginated")
-    @Operation(description = "Get paginated list of Groups", summary = "Get paginated list of Groups")
-    public ResponseEntity<Page<GroupDTO>> getGroupsPaginated(Pageable pageable) {
-        Page<GroupDTO> groupPage = groupService.getGroupsPaginated(pageable);
-        return ResponseEntity.ok(groupPage);
+    @GetMapping("/{groupId}/members")
+    @Operation(description = "Get all members of a Group with pagination", summary = "Get all members of a Group with pagination")
+    public ResponseEntity<Page<User>> getGroupMembers(@PathVariable("groupId") UUID groupId, Pageable pageable) {
+        Page<User> members = groupService.getGroupMembers(groupId, pageable);
+        if (members.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } else {
+            return ResponseEntity.ok(members);
+        }
     }
-
-
 }
