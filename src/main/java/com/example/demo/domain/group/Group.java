@@ -18,10 +18,6 @@ import org.springframework.security.core.userdetails.User;
 @Table(name = "group")
 public class Group extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "group_id")
-    private int group_id;
 
     @Column(name = "group_motto")
     @NotNull

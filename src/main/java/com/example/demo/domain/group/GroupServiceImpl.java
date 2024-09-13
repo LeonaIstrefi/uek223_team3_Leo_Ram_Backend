@@ -43,7 +43,6 @@ public class GroupServiceImpl {
     public GroupDTO updateGroup(Integer groupId, GroupDTO groupDTO) {
         if (groupRepository.existsById(groupId)) {
             Group group = groupMapper.fromDTO(groupDTO);
-            group.setGroup_id(groupId);
             group = groupRepository.save(group);
             return groupMapper.toDTO(group);
         }
