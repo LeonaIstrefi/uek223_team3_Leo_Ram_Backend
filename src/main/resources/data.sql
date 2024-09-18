@@ -38,11 +38,12 @@ VALUES ('d29e709c-0ff1-4f4c-a7ef-09f656c390f1', '2ebf301e-6c61-4076-98e3-2a38b31
 
 -- Insert a group with a manually specified UUID if auto-generation isn't supported directly in SQL
 INSERT INTO groups (id, group_motto, group_name, group_logo_url)
-VALUES ('95b11c3e-aaf9-41fc-8dd6-db09585cb8d7', 'Eine für Alle', 'Helfer', 'https://kuppelsteinbad.de/wp-content/uploads/logo.png');
+VALUES ('95b11c3e-aaf9-41fc-8dd6-db09585cb8d7', 'Eine für Alle', 'Helfer', 'https://kuppelsteinbad.de/wp-content/uploads/logo.png'),
+       ('ca7879c7-0c36-4a56-9a43-11644b980019', 'Noser on Top', 'Noser', 'https://shorturl.at/eba9F');
 
 -- Insert into group_users to associate users with the group
 INSERT INTO group_users (group_id, user_id)
 VALUES
     ('95b11c3e-aaf9-41fc-8dd6-db09585cb8d7', 'ba804cb9-fa14-42a5-afaf-be488742fc54'), -- User 1
-    ('95b11c3e-aaf9-41fc-8dd6-db09585cb8d7', '0d8fa44c-54fd-4cd0-ace9-2a7da57992de'); -- User 2
+    ('ca7879c7-0c36-4a56-9a43-11644b980019', '0d8fa44c-54fd-4cd0-ace9-2a7da57992de'); -- User 2
 
