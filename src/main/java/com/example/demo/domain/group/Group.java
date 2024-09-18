@@ -15,7 +15,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@Table(name = "group")
+@Table(name = "groups")
 public class Group extends AbstractEntity {
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -24,11 +24,13 @@ public class Group extends AbstractEntity {
             joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
+
+    @Max(10)
     private List<User> members;
 
     @Column(name = "group_motto")
     @NotNull
-    @Size(max = 20)
+    @Size(max = 100)
     private String group_motto;
 
     @Column(name = "group_name")
