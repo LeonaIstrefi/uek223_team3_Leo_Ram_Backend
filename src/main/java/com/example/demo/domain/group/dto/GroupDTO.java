@@ -16,7 +16,6 @@ import java.util.UUID;
 @Setter
 public class GroupDTO extends AbstractDTO {
 
-    private int groupId;
 
     @NotNull
     @Max(20)
@@ -32,9 +31,8 @@ public class GroupDTO extends AbstractDTO {
     private String memberName;
 
 
-    public GroupDTO(UUID id, int groupId, String groupMotto, String groupName, String groupLogoUrl, String memberName) {
+    public GroupDTO(UUID id, String groupMotto, String groupName, String groupLogoUrl, String memberName) {
         super(id);
-        this.groupId = groupId;
         this.groupMotto = groupMotto;
         this.groupName = groupName;
         this.groupLogoUrl = groupLogoUrl;
