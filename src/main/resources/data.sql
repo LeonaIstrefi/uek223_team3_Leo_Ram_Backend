@@ -33,3 +33,8 @@ VALUES ('d29e709c-0ff1-4f4c-a7ef-09f656c390f1', '2ebf301e-6c61-4076-98e3-2a38b31
 ('ab505c92-7280-49fd-a7de-258e618df074', '76d2cbf6-5845-470e-ad5f-2edb9e09a868'),
 ('c6aee32d-8c35-4481-8b3e-a876a39b0c02', '21c942db-a275-43f8-bdd6-d048c21bf5ab')
  ON CONFLICT DO NOTHING;
+
+-- Insert into groups without specifying the ID
+INSERT INTO groups(id, group_motto, group_name, group_logo_url)
+VALUES ('95b11c3e-aaf9-41fc-8dd6-db09585cb8d7','Eine für Alle', 'Helfer', 'https://kuppelsteinbad.de/wp-content/uploads/logo.png')
+ON CONFLICT DO NOTHING;
