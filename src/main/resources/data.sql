@@ -17,7 +17,10 @@ INSERT INTO authority(id, name)
 VALUES ('2ebf301e-6c61-4076-98e3-2a38b31daf86', 'DEFAULT'),
 ('76d2cbf6-5845-470e-ad5f-2edb9e09a868', 'USER_MODIFY'),
 ('21c942db-a275-43f8-bdd6-d048c21bf5ab', 'USER_DELETE'),
-('001eee79-603b-420b-a51b-dab55b0a05cc', 'USER_CREATE')
+('001eee79-603b-420b-a51b-dab55b0a05cc', 'USER_CREATE'),
+('218efa60-3186-4c6a-be0b-83f0785f7df1', 'GROUP_MODIFY'),
+('8f46e649-56eb-4dff-abdb-a802f13377f0', 'GROUP_DELETE'),
+('83c07bc4-7ebc-45a4-a89b-0811ef6eedd7', 'GROUP_CREATE')
 ON CONFLICT DO NOTHING;
 
 --assign roles to users
@@ -33,7 +36,10 @@ INSERT INTO role_authority(role_id, authority_id)
 VALUES ('d29e709c-0ff1-4f4c-a7ef-09f656c390f1', '2ebf301e-6c61-4076-98e3-2a38b31daf86'),
 ('ab505c92-7280-49fd-a7de-258e618df074', '76d2cbf6-5845-470e-ad5f-2edb9e09a868'),
 ('c6aee32d-8c35-4481-8b3e-a876a39b0c02', '21c942db-a275-43f8-bdd6-d048c21bf5ab'),
-('ab505c92-7280-49fd-a7de-258e618df074', '001eee79-603b-420b-a51b-dab55b0a05cc')
+('ab505c92-7280-49fd-a7de-258e618df074', '001eee79-603b-420b-a51b-dab55b0a05cc'),
+('ab505c92-7280-49fd-a7de-258e618df074', '218efa60-3186-4c6a-be0b-83f0785f7df1'),
+('ab505c92-7280-49fd-a7de-258e618df074', '8f46e649-56eb-4dff-abdb-a802f13377f0'),
+('ab505c92-7280-49fd-a7de-258e618df074', '83c07bc4-7ebc-45a4-a89b-0811ef6eedd7')
  ON CONFLICT DO NOTHING;
 
 -- Insert a group with a manually specified UUID if auto-generation isn't supported directly in SQL

@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/group")
+@RequestMapping("/groups")
 public class GroupController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class GroupController {
     }
 
     @PostMapping("")
-    @PreAuthorize("hasAuthority('CREATE')")
+    @PreAuthorize("hasAuthority('GROUP_CREATE')")
     @Operation(description = "Create a new group with the provided details.", summary = "Create a new Group")
     public ResponseEntity<GroupDTO> addGroup(@Valid @RequestBody GroupDTO groupDTO) {
         GroupDTO createdGroup = groupService.addGroup(groupDTO);
@@ -46,7 +46,7 @@ public class GroupController {
     }
 
     @PutMapping("/{groupId}")
-    @PreAuthorize("hasAuthority('UPDATE')")
+    @PreAuthorize("hasAuthority('GROUP_MODIFY')")
     @Operation(description = "Update the details of an existing group identified by its unique ID.", summary = "Update an existing Group")
     public ResponseEntity<GroupDTO> updateGroup(@PathVariable("groupId") UUID groupId, @Valid @RequestBody GroupDTO groupDTO) {
         GroupDTO updatedGroup = groupService.updateGroup(groupId, groupDTO);
@@ -58,7 +58,7 @@ public class GroupController {
     }
 
     @DeleteMapping("/{groupId}")
-    @PreAuthorize("hasAuthority('DELETE')")
+    @PreAuthorize("hasAuthority('GROUP_DELETE')")
     @Operation(description = "Remove a group from the system using its unique identifier.", summary = "Delete an existing Group")
     public ResponseEntity<Void> deleteGroup(@PathVariable UUID groupId) {
         groupService.deleteGroup(groupId);
@@ -66,13 +66,10 @@ public class GroupController {
     }
 
     @GetMapping("/{groupId}/members")
+    @PreAuthorize("@groupSecurityService.isMemberOrAdmin(authentication, #groupId)")
     @Operation(description = "Retrieve a paginated list of all members belonging to a specific group.", summary = "Get all members of a Group")
     public ResponseEntity<Page<User>> getGroupMembers(@PathVariable("groupId") UUID groupId, Pageable pageable) {
         Page<User> members = groupService.getGroupMembers(groupId, pageable);
-        if (members.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } else {
-            return ResponseEntity.ok(members);
-        }
+        return ResponseEntity.ok(members);
     }
 }
