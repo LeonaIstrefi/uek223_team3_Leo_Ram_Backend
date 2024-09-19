@@ -8,8 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +20,6 @@ import java.util.UUID;
 @Log4j2
 @Table(name = "groups")
 public class Group extends AbstractEntity {
-
-    private static final Logger logger = LoggerFactory.getLogger(Group.class);
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
