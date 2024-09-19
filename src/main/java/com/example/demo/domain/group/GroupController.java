@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -72,4 +73,13 @@ public class GroupController {
         Page<User> members = groupService.getGroupMembers(groupId, pageable);
         return ResponseEntity.ok(members);
     }
+
+    @PutMapping("/{groupId}/members")
+    @PreAuthorize("hasAuthority('USER_MODIFY')")
+    public ResponseEntity<GroupDTO> addUserToGroup(@PathVariable UUID groupId, @RequestBody Map<String, String> userIdMap) {
+        String userId = userIdMap.get("userId");
+        GroupDTO updatedGroup = groupService.addUserToGroup(groupId, userId);
+        return ResponseEntity.ok(updatedGroup);
+    }
+
 }

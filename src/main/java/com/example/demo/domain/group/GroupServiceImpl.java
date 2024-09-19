@@ -94,4 +94,16 @@ public class GroupServiceImpl extends AbstractServiceImpl<Group> implements Grou
         }
         return Page.empty(pageable);
     }
+
+    @Transactional
+    public GroupDTO addUserToGroup(UUID groupId, String userId) {
+        Group group = groupRepository.findById(groupId).orElseThrow(() -> new NoSuchElementException("Group not found"));
+        User user = userRepository.findById(UUID.fromString(userId)).orElseThrow(() -> new NoSuchElementException("User not found"));
+
+        group.getMembers().add(user);
+        groupRepository.save(group);
+
+        return groupMapper.toDTO(group);
+    }
+
 }
