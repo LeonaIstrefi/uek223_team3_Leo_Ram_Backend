@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "519f65ec-8cbe-4c15-adba-50ed96db35f6",
+		"name": "KomponentenTests-Group",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33321220"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "GetGroups",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiYTgwNGNiOS1mYTE0LTQyYTUtYWZhZi1iZTQ4ODc0MmZjNTQiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiVVNFUl9DUkVBVEUifSx7ImF1dGhvcml0eSI6IlVTRVJfTU9ESUZZIn0seyJhdXRob3JpdHkiOiJERUZBVUxUIn0seyJhdXRob3JpdHkiOiJVU0VSX0RFTEVURSJ9XSwiaWF0IjoxNzI2NjU5ODAyLCJleHAiOjE3MjY3NTk4MDIsImlzcyI6InVrMjIzIn0.XpSq6Dt4awyj1O0p6xFTyJyPDhmeJ6RPowZ2sxIAg760-YVu5DY7z-QtvSKxvEe5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetGroupById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiYTgwNGNiOS1mYTE0LTQyYTUtYWZhZi1iZTQ4ODc0MmZjNTQiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiVVNFUl9DUkVBVEUifSx7ImF1dGhvcml0eSI6IlVTRVJfTU9ESUZZIn0seyJhdXRob3JpdHkiOiJERUZBVUxUIn0seyJhdXRob3JpdHkiOiJVU0VSX0RFTEVURSJ9XSwiaWF0IjoxNzI2NjU5ODAyLCJleHAiOjE3MjY3NTk4MDIsImlzcyI6InVrMjIzIn0.XpSq6Dt4awyj1O0p6xFTyJyPDhmeJ6RPowZ2sxIAg760-YVu5DY7z-QtvSKxvEe5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/groups/95b11c3e-aaf9-41fc-8dd6-db09585cb8d7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"groups",
+								"95b11c3e-aaf9-41fc-8dd6-db09585cb8d7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateGroup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiYTgwNGNiOS1mYTE0LTQyYTUtYWZhZi1iZTQ4ODc0MmZjNTQiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiVVNFUl9DUkVBVEUifSx7ImF1dGhvcml0eSI6IlVTRVJfTU9ESUZZIn0seyJhdXRob3JpdHkiOiJERUZBVUxUIn0seyJhdXRob3JpdHkiOiJVU0VSX0RFTEVURSJ9XSwiaWF0IjoxNzI2NjU5ODAyLCJleHAiOjE3MjY3NTk4MDIsImlzcyI6InVrMjIzIn0.XpSq6Dt4awyj1O0p6xFTyJyPDhmeJ6RPowZ2sxIAg760-YVu5DY7z-QtvSKxvEe5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"ffaca325-8e90-4bf8-958c-e556dda88c30\",\r\n    \"groupMotto\": \"Testermotto\",\r\n    \"groupName\": \"Test\",\r\n    \"groupLogoUrl\": \"https://kuppelsteinbad.de/wp-content/uploads/logo.png\",\r\n    \"memberEmails\": []\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateGroup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiYTgwNGNiOS1mYTE0LTQyYTUtYWZhZi1iZTQ4ODc0MmZjNTQiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiVVNFUl9DUkVBVEUifSx7ImF1dGhvcml0eSI6IlVTRVJfTU9ESUZZIn0seyJhdXRob3JpdHkiOiJERUZBVUxUIn0seyJhdXRob3JpdHkiOiJVU0VSX0RFTEVURSJ9XSwiaWF0IjoxNzI2NjU5ODAyLCJleHAiOjE3MjY3NTk4MDIsImlzcyI6InVrMjIzIn0.XpSq6Dt4awyj1O0p6xFTyJyPDhmeJ6RPowZ2sxIAg760-YVu5DY7z-QtvSKxvEe5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"43177511-8e3f-4342-b33f-682b9825dbfe\",\r\n    \"groupMotto\": \"TesterPut\",\r\n    \"groupName\": \"Test\",\r\n    \"groupLogoUrl\": \"https://kuppelsteinbad.de/wp-content/uploads/logo.png\",\r\n    \"memberEmails\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/groups/95b11c3e-aaf9-41fc-8dd6-db09585cb8d7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"groups",
+								"95b11c3e-aaf9-41fc-8dd6-db09585cb8d7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteGroup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiYTgwNGNiOS1mYTE0LTQyYTUtYWZhZi1iZTQ4ODc0MmZjNTQiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiVVNFUl9DUkVBVEUifSx7ImF1dGhvcml0eSI6IlVTRVJfTU9ESUZZIn0seyJhdXRob3JpdHkiOiJERUZBVUxUIn0seyJhdXRob3JpdHkiOiJVU0VSX0RFTEVURSJ9XSwiaWF0IjoxNzI2NjU5ODAyLCJleHAiOjE3MjY3NTk4MDIsImlzcyI6InVrMjIzIn0.XpSq6Dt4awyj1O0p6xFTyJyPDhmeJ6RPowZ2sxIAg760-YVu5DY7z-QtvSKxvEe5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/groups/43177511-8e3f-4342-b33f-682b9825dbfe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"groups",
+								"43177511-8e3f-4342-b33f-682b9825dbfe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GetGroups",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiREVGQVVMVCJ9XSwic3ViIjoiMGQ4ZmE0NGMtNTRmZC00Y2QwLWFjZTktMmE3ZGE1Nzk5MmRlIiwiaWF0IjoxNzI2NzQ3ODk3LCJleHAiOjE3MjY4NDc4OTcsImlzcyI6InVrMjIzIn0.wLa9__h9UHhYnXKYds88Abt9z-_lLSrh_ooDBQsFisc-JyGRVEA_yzlIHq4WsdTD",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetGroupById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/groups/95b11c3e-aaf9-41fc-8dd6-db09585cb8d7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"groups",
+								"95b11c3e-aaf9-41fc-8dd6-db09585cb8d7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateGroup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"ffaca325-8e90-4bf8-958c-e556dda88c30\",\r\n    \"groupMotto\": \"Testermotto\",\r\n    \"groupName\": \"Test\",\r\n    \"groupLogoUrl\": \"https://kuppelsteinbad.de/wp-content/uploads/logo.png\",\r\n    \"memberEmails\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateGroup",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"id\": \"95b11c3e-aaf9-41fc-8dd6-db09585cb8d7\",\r\n        \"groupMotto\": \"Eine für Alle\",\r\n        \"groupName\": \"Helfer\",\r\n        \"groupLogoUrl\": \"https://kuppelsteinbad.de/wp-content/uploads/logo.png\",\r\n        \"memberEmails\": [\r\n            \"admin@example.com\"\r\n        ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/groups/95b11c3e-aaf9-41fc-8dd6-db09585cb8d7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"groups",
+								"95b11c3e-aaf9-41fc-8dd6-db09585cb8d7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteGroup",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/groups/95b11c3e-aaf9-41fc-8dd6-db09585cb8d7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"groups",
+								"95b11c3e-aaf9-41fc-8dd6-db09585cb8d7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
