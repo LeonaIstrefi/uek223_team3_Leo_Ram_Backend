@@ -74,6 +74,7 @@ public class GroupServiceImpl extends AbstractServiceImpl<Group> implements Grou
         groupRepository.deleteById(groupId);
     }
 
+    // Retrieves and manually paginates the members of a group using the given Pageable details.
     @Transactional
     public Page<User> getGroupMembers(UUID groupId, Pageable pageable) {
         Optional<Group> group = groupRepository.findById(groupId);
