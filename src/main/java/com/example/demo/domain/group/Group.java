@@ -31,26 +31,25 @@ public class Group extends AbstractEntity {
     @Column(name = "group_motto")
     @NotNull
     @Size(max = 100)
-    private String group_motto;
+    private String groupMotto;
 
     @Column(name = "group_name")
     @NotNull
     @Size(min = 3, max = 20)
-    private String group_name;
+    private String groupName;
 
     @Column(name = "group_logo_url")
     @NotNull
-    private String group_logo_url;
+    private String groupLogoUrl;
 
-    public Group(UUID id, List<User> members, String group_motto, String group_name, String group_logo_url) {
+    public Group(UUID id, List<User> members, String groupMotto, String groupName, String groupLogoUrl) {
         super(id);
         this.members = members;
-        this.group_motto = group_motto;
-        this.group_name = group_name;
-        this.group_logo_url = group_logo_url;
+        this.groupMotto = groupMotto;
+        this.groupName = groupName;
+        this.groupLogoUrl = groupLogoUrl;
     }
 
     public Group() {
-
     }
 }
