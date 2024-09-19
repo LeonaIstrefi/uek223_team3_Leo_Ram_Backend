@@ -20,7 +20,7 @@ public interface GroupMapper extends AbstractMapper<Group, GroupDTO> {
         return new GroupDTO(group.getId(), group.getGroupMotto(), group.getGroupName(), group.getGroupLogoUrl(), memberEmails);
     }
 
-    default Group fromDTO(GroupDTO groupDTO) {
-        return new Group(groupDTO.getId(), null, groupDTO.getGroupMotto(), groupDTO.getGroupName(), groupDTO.getGroupLogoUrl());
+    default Group fromDTO(GroupDTO groupDTO, List<User> users) {
+        return new Group(groupDTO.getId(), users, groupDTO.getGroupMotto(), groupDTO.getGroupName(), groupDTO.getGroupLogoUrl());
     }
 }

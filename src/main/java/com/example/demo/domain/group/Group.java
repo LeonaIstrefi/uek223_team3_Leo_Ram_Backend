@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,9 +25,7 @@ public class Group extends AbstractEntity {
             joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
-
-    @Max(10)
-    private List<User> members;
+    private List<User> members = new ArrayList<>();
 
     @Column(name = "group_motto")
     @NotNull
@@ -44,12 +43,13 @@ public class Group extends AbstractEntity {
 
     public Group(UUID id, List<User> members, String groupMotto, String groupName, String groupLogoUrl) {
         super(id);
-        this.members = members;
+        this.members = (members != null) ? members : new ArrayList<>();
         this.groupMotto = groupMotto;
         this.groupName = groupName;
         this.groupLogoUrl = groupLogoUrl;
     }
 
     public Group() {
+        this.members = new ArrayList<>();
     }
 }

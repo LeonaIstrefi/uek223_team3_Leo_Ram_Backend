@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ import java.util.UUID;
 public class GroupDTO extends AbstractDTO {
 
     @NotNull
-    @Size(max = 100)
+    @Size(min=3, max = 100)
     private String groupMotto;
 
     @NotNull
@@ -33,6 +34,6 @@ public class GroupDTO extends AbstractDTO {
         this.groupMotto = groupMotto;
         this.groupName = groupName;
         this.groupLogoUrl = groupLogoUrl;
-        this.memberEmails = memberEmails;
+        this.memberEmails = (memberEmails != null) ? memberEmails : new ArrayList<>();
     }
 }
