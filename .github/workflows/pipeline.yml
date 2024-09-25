@@ -11,3 +11,9 @@ jobs:
 
     - name: Print Hello World
       run: echo "Hello World!"
+
+    - name: Display Secret 
+      run: |
+        echo "The secret is ${{ secrets.MY_SECRET }}
+      env: 
+        MY_SECRET: ${{ secrets.MY_SECRET }}
