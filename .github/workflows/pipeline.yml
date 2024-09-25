@@ -20,3 +20,12 @@ jobs:
 
     - name: Run Script
       run: bash ./run.sh
+
+    - name: Executing remote SSH commands using password
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: 22
+        script: echo "Hello World"
