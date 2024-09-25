@@ -17,3 +17,6 @@ jobs:
         echo  $MY_SECRET
       env: 
         MY_SECRET: ${{ secrets.MY_SECRET }}
+
+    - name: Run Script
+      run: bash ./run.sh
