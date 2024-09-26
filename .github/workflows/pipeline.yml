@@ -19,13 +19,13 @@ jobs:
         distribution: 'temurin'
 
     - name: Grant execute permission for gradlew
-      run: chmod +x ./gradlew
+      run: chmod +x ./gradle
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradle build
 
     - name: Test with Gradle
-      run: ./gradlew test
+      run: ./gradle test
 
     - name: Display Secret 
       run: |
