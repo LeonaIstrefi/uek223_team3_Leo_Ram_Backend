@@ -11,8 +11,6 @@ jobs:
 
     - name: Print Hello World
       run: echo "Hello World!"
-
-     
       
     - name: Display Secret 
       run: |
@@ -22,6 +20,17 @@ jobs:
 
     - name: Run Script
       run: bash ./run.sh
+
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DOCKER_HOST }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        proxy_host: ${{ secrets.PROXY_HOST }}
+        proxy_username: ${{ secrets.PROXY_USERNAME }}
+        proxy_password: ${{ secrets.PROXY_PASSWORD}}
+        script: echo "Hello World"
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
