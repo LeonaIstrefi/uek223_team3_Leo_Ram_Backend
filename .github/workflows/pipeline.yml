@@ -47,6 +47,7 @@ jobs:
         context: .
         push: true
         tags: leonaistrefi/app:latest
+        
 
    
         
