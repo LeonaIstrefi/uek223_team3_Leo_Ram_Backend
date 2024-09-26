@@ -27,5 +27,5 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        port: 3000:80
+        port: 5423:5423
         script: echo "Hello World"
