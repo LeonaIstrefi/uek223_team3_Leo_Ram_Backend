@@ -28,8 +28,6 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: 22
-        script: |
-          set -x  # Enable shell debugging
-          echo "Hello World"
+        script: echo "Hello World"
 
         
