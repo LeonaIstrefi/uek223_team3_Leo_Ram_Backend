@@ -21,15 +21,15 @@ jobs:
 
       # Make gradlew executable (use the correct path to gradlew)
     - name: Make gradlew executable
-      run: chmod +x /Projects/NoserYoung/PLJ/uek223_team3_Leo_Ram_Backend/gradlew
+      run: chmod +x ./Projects/NoserYoung/PLJ/uek223_team3_Leo_Ram_Backend/gradlew
 
       # Build the project using Gradle (use the correct path)
     - name: Build with Gradle
-      run: /Projects/NoserYoung/PLJ/uek223_team3_Leo_Ram_Backend/gradlew build
+      run: ./Projects/NoserYoung/PLJ/uek223_team3_Leo_Ram_Backend/gradlew build
 
       # Test the project using Gradle (use the correct path)
     - name: Test with Gradle
-      run: /Projects/NoserYoung/PLJ/uek223_team3_Leo_Ram_Backend/gradlew test
+      run: ./Projects/NoserYoung/PLJ/uek223_team3_Leo_Ram_Backend/gradlew test
       
     - name: Display Secret 
       run: |
