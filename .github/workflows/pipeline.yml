@@ -37,13 +37,6 @@ jobs:
           proxy_username: ${{ secrets.PROXY_USERNAME }}
           proxy_password: ${{ secrets.PROXY_PASSWORD }}
           script: echo "Hello World"
-
-  sonarcloud:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
           
       - name: Set up JDK 18
         uses: actions/setup-java@v2
@@ -56,11 +49,6 @@ jobs:
         
       - name: Build with Gradle
         run: gradle build
-
-      - name: Run SonarQube analysis
-        run: gradle sonar
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Run tests with Gradle
         run: gradle test
