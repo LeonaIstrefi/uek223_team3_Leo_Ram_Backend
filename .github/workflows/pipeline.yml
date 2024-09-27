@@ -2,7 +2,12 @@ name: Hello World CI
 
 on:
   push:
-   
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
