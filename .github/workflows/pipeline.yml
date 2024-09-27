@@ -1,64 +1,70 @@
 name: Hello World CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - name: Print Hello World
+        run: echo "Hello World!"
+      - name: Display Secret
+        run: |
+          echo $MY_SECRET
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
+      - name: Run Script
+        run: bash ./run.sh
+      - name: Executing remote SSH commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.JUMP_HOST }}
+          username: ${{ secrets.JUMP_USERNAME }}
+          password: ${{ secrets.JUMP_PASSWORD }}
+          proxy_host: ${{ secrets.PROXY_HOST }}
+          proxy_username: ${{ secrets.PROXY_USERNAME }}
+          proxy_password: ${{ secrets.PROXY_PASSWORD }}
+          script: echo "Hello World"
 
-    - name: Print Hello World
-      run: echo "Hello World!"
-      
-    - name: Display Secret 
-      run: |
-        echo  $MY_SECRET
-      env: 
-        MY_SECRET: ${{ secrets.MY_SECRET }}
-
-    - name: Run Script
-      run: bash ./run.sh
-
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.JUMP_HOST }}
-        username: ${{ secrets.JUMP_USERNAME }}
-        password: ${{ secrets.JUMP_PASSWORD }}
-        proxy_host: ${{ secrets.PROXY_HOST }}
-        proxy_username: ${{ secrets.PROXY_USERNAME }}
-        proxy_password: ${{ secrets.PROXY_PASSWORD}}
-        script: echo "Hello World"
- 
-    - name: Set up JDK 18
-      uses: actions/setup-java@v2
-      with:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@<action version> # replace <action version> with the version at https://github.com/marketplace/actions/sonarcloud-scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Set up JDK 18
+        uses: actions/setup-java@v2
+        with:
           java-version: '18'
           distribution: 'adopt'
- 
-    - name: Set up Gradle
-      uses: gradle/gradle-build-action@v2
- 
-    - name: Build with Gradle
-      run: gradle build
- 
-    - name: Run tests with Gradle
-      run: gradle test
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-
-    - name: Login to Dockerhub 
-      uses: docker/login-action@v3
-      with: 
-        username: ${{ secrets.DOCKER_USERNAME}}
-        password: ${{ secrets.DOCKER_PASSWORD}}
-
-    - name: Build and push
-      uses: docker/build-push-action@v6
-      with:
-        context: .
-        push: true
-        tags: leonaistrefi/app:latest
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Build with Gradle
+        run: gradle build
+      - name: Run tests with Gradle
+        run: gradle test
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to Dockerhub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: leonaistrefi/app:latest
