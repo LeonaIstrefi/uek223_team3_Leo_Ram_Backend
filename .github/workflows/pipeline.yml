@@ -52,6 +52,11 @@ jobs:
 
       - name: Run tests with Gradle
         run: gradle test
+
+      - name: SonarQube Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: gradle sonarqube
         
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
