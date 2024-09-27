@@ -58,7 +58,7 @@ jobs:
         run: gradle build
 
       - name: Run SonarQube analysis
-        run: gradle sonarqube
+        run: gradle sonar
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
